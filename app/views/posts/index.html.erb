@@ -1,4 +1,17 @@
 <% @posts.each do | post | %>
+    
     <h5><%= post.title %></h5> 
     <p><%= post.body %></p>
+
+<% if member_signed_in? %>
+<small><%= post.member.name %></small> </br>
+<%= link_to "New Post", new_post_path %> </br>
+<% end %>
+<% end %>
+
+<% if member_signed_in? %>
+<%= link_to "Sign Out", destroy_member_session_path, method: :delete  %> 
+<% else %>
+<%= link_to "Sign In", new_member_session_path %>
+<%= link_to "Sign Up", new_member_registration_path %>
 <% end %>
